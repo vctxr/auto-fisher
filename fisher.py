@@ -37,8 +37,8 @@ def find_color(pixel_color, acceptable_range, picture, width, height):
     return None, None
 
 iteration = 0
-last_x = 0
-last_y = 0
+last_x = None
+last_y = None
 
 while not keyboard.is_pressed('q'):
     iteration = (iteration + 1) % 1000
@@ -56,7 +56,7 @@ while not keyboard.is_pressed('q'):
         click(x_offset + x, y_offset + y)
 
     # fallback if target color not found
-    if iteration > 200 and last_x != 0 and last_y != 0:
+    if iteration > 200 and last_x != None and last_y != None:
         iteration = 0
         print("Fallback triggered!")
         click(x_offset + last_x, y_offset + last_y)
