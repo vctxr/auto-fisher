@@ -1,7 +1,8 @@
 import pyautogui            # pip install pyautogui
 import win32api, win32con
 import time
-import keyboard             # pip install keyboard
+import keyboard             # pip install 
+import random
 
 # NOTE: ADJUST THESE 4 VALUES ACCORDING TO YOUR SETUP
 # TO FIND OUT THIS VALUES UNCOMMENT THIS CODE TO CHECK THE BUTTON POSITION
@@ -9,7 +10,7 @@ import keyboard             # pip install keyboard
 # pyautogui.displayMousePosition()
 
 width, height = 50, 50          # scan area
-x_offset, y_offset = 760, 350   # offset from the top left corner
+x_offset, y_offset = 680, 340   # offset from the top left corner
 trigger_color = (172, 231, 92)  # RGB color
 color_range = 15                # acceptable color range
 
@@ -51,9 +52,11 @@ while not keyboard.is_pressed('q'):
         print(f'Button found at ({x}, {y}), iteration = {iteration}')
         iteration = 0
         last_x, last_y = x, y
-        click(x_offset + x, y_offset + y)
-        time.sleep(3.5)   # delay to cast another fishing rod
-        click(x_offset + x, y_offset + y)
+
+        time.sleep(random.uniform(0, 0.3)) # introduce a delay to remove any repetitive patterns that the game may detect.
+        click(x_offset + x + random.randint(20, 50), y_offset + random.randint(20, 50))
+        time.sleep(3.5 + random.uniform(0, 2))   # delay to cast another fishing rod
+        click(x_offset + x + random.randint(20, 50), y_offset + y + random.randint(20, 50))
 
     # fallback if target color not found
     if iteration > 200 and last_x != None and last_y != None:
